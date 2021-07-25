@@ -22,7 +22,7 @@ plugins {
 }
 
 group = 'com.playsawdust.chipper'
-archivesBaseName = 'glow-image'
+archivesBaseName = 'glow-io'
 version = '0.0.1'
 
 java {
