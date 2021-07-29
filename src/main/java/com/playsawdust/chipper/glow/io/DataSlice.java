@@ -214,6 +214,11 @@ public interface DataSlice {
 		return new ArrayDataSlice(data);
 	}
 	
+	/**
+	 * Closes the underlying slice, file, or stream
+	 */
+	void close() throws IOException;
+	
 	
 	/**
 	 * Creates a DataSlice backed by the specified array.

@@ -69,4 +69,9 @@ public class LightweightDataSlice implements DataSlice {
 		this.byteOrder = order;
 	}
 	
+	@Override
+	public void close() throws IOException {
+		underlying.close();
+	}
+	
 }

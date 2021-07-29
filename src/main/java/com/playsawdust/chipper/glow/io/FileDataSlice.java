@@ -65,4 +65,9 @@ public class FileDataSlice implements DataSlice {
 	public void setByteOrder(ByteOrder order) {
 		this.byteOrder = order;
 	}
+
+	@Override
+	public void close() throws IOException {
+		file.close();
+	}
 }

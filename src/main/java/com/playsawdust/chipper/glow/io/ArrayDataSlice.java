@@ -9,6 +9,7 @@
 
 package com.playsawdust.chipper.glow.io;
 
+import java.io.IOException;
 import java.nio.ByteOrder;
 
 public class ArrayDataSlice implements DataSlice {
@@ -77,6 +78,11 @@ public class ArrayDataSlice implements DataSlice {
 	@Override
 	public void setByteOrder(ByteOrder order) {
 		this.byteOrder = order;
+	}
+	
+	@Override
+	public void close() throws IOException {
+		// Do Nothing
 	}
 	
 }
