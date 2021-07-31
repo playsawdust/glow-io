@@ -263,7 +263,7 @@ public interface DataSlice {
 		}
 	}
 	
-	public static long order(int a, int b, int c, int d, int e, int f, int g, int h, ByteOrder order) {
+	public static long order(long a, long b, long c, long d, long e, long f, long g, long h, ByteOrder order) {
 		if (order==ByteOrder.BIG_ENDIAN) {
 			return  ((a & 0xFF) << 56) |
 					((b & 0xFF) << 48) |
