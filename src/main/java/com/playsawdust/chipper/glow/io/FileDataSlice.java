@@ -53,7 +53,9 @@ public class FileDataSlice implements DataSlice {
 
 	@Override
 	public DataSlice slice(long offset, long length) {
-		return new LightweightDataSlice(this, offset, length);
+		LightweightDataSlice result = new LightweightDataSlice(this, offset, length);
+		this.pointer += length;
+		return result;
 	}
 
 	@Override

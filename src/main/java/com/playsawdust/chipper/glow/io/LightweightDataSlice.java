@@ -56,7 +56,9 @@ public class LightweightDataSlice implements DataSlice {
 
 	@Override
 	public DataSlice slice(long offset, long length) {
-		return new LightweightDataSlice(this, offset, length);
+		LightweightDataSlice result = new LightweightDataSlice(this, offset, length);
+		pointer += length;
+		return result;
 	}
 
 	@Override

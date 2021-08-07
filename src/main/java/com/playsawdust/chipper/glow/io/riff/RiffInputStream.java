@@ -58,7 +58,7 @@ public class RiffInputStream {
 			}
 		}
 		
-		return result;
+		return result.stripTrailing();
 	}
 	
 	public static String readTag(DataSlice in) throws IOException {
@@ -74,6 +74,6 @@ public class RiffInputStream {
 			}
 		}
 		
-		return result;
+		return result.stripTrailing();
 	}
 }

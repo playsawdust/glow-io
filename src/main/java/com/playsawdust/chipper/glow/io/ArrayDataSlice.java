@@ -62,11 +62,12 @@ public class ArrayDataSlice implements DataSlice {
 
 	@Override
 	public DataSlice slice(long offset, long length) {
-		if (offset<0 || offset > this.baseOffset) throw new ArrayIndexOutOfBoundsException();
-		if (length<0 || offset+length > length) throw new ArrayIndexOutOfBoundsException();
+		if (offset<0 || offset > this.baseOffset+this.length) throw new ArrayIndexOutOfBoundsException();
+		if (length<0 || offset+length > this.length) throw new ArrayIndexOutOfBoundsException();
 		
 		ArrayDataSlice result = new ArrayDataSlice(data, (int) (this.baseOffset+offset), (int) length);
 		result.setByteOrder(byteOrder);
+		this.pointer += length;
 		return result;
 	}
 

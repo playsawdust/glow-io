@@ -172,8 +172,7 @@ public interface DataSlice {
 	/**
 	 * Slices this DataSlice into a sub-slice. No data is copied, and reads always "read-through". If there is a change
 	 * to the backing file or array, and it falls within this slice and the returned slice, both slices will be able to
-	 * see the change.
-	 * 
+	 * see the change. This DataSlice's offset will be moved to the first byte after the newly-created slice.
 	 * 
 	 * <p>The ByteOrder of the return value will be equal to the ByteOrder of this DataSlice, but subsequent changes
 	 * to the ByteOrder in either slice will not affect the other.
@@ -186,8 +185,8 @@ public interface DataSlice {
 	/**
 	 * Slices this DataSlice into a sub-slice starting from the current read pointer. No data is copied, and reads
 	 * always "read-through". If there is a change to the backing file or array, and it falls within this slice and the
-	 * returned slice, both slices will be able to see the change.
-	 * 
+	 * returned slice, both slices will be able to see the change. This DataSlice's offset will be moved to the first
+	 * byte after the newly-created slice.
 	 * 
 	 * <p>The ByteOrder of the return value will be equal to the ByteOrder of this DataSlice, but subsequent changes
 	 * to the ByteOrder in either slice will not affect the other.
