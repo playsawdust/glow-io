@@ -12,7 +12,9 @@ package com.playsawdust.chipper.glow.io.riff;
 import java.io.IOException;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
+import java.util.List;
 
+import com.google.common.collect.ImmutableList;
 import com.playsawdust.chipper.glow.io.DataSlice;
 
 public class ListRiffChunk extends RiffChunk {
@@ -23,11 +25,11 @@ public class ListRiffChunk extends RiffChunk {
 		super(tag, contents);
 		contents.seek(0L);
 		contents.setByteOrder(ByteOrder.LITTLE_ENDIAN);
-		listType = "" + contents.read() + contents.read() + contents.read() + contents.read();
+		listType = RiffInputStream.readTag(contents);
 		
 		try {
 			while(contents.position()<contents.length()) {
-				String subchunkTag = "" + contents.read() + contents.read() + contents.read() + contents.read();
+				String subchunkTag = RiffInputStream.readTag(contents);
 				int chunkSize = contents.readI32s();
 				DataSlice chunkData = contents.slice(chunkSize);
 				if (subchunkTag.equals("RIFF") || subchunkTag.equals("LIST")) {
@@ -38,5 +40,13 @@ public class ListRiffChunk extends RiffChunk {
 			}
 		} catch (IOException ex) {} //Catch exception in case of a truncated chunk, which will be dropped.
 	}
-
+	
+	public String getListType() {
+		return listType;
+	}
+	
+	public List<RiffChunk> getChildren() {
+		return ImmutableList.copyOf(children);
+	}
+	
 }

@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import com.playsawdust.chipper.glow.io.ArrayDataSlice;
+import com.playsawdust.chipper.glow.io.DataSlice;
 
 public class RiffInputStream {
 	private final InputStream in;
@@ -22,10 +23,7 @@ public class RiffInputStream {
 	}
 	
 	public RiffChunk readChunk() throws IOException {
-		String chunkTag = "";
-		for(int i=0; i<4; i++) {
-			chunkTag = chunkTag + in.read();
-		}
+		String chunkTag = readTag(in);
 		
 		int chunkSize = (in.read() & 0xFF) << 24;
 		chunkSize |=    (in.read() & 0xFF) << 16;
@@ -45,5 +43,37 @@ public class RiffInputStream {
 	
 	public void close() throws IOException {
 		in.close();
+	}
+	
+	public static String readTag(InputStream in) throws IOException {
+		String result = "";
+		
+		boolean terminated = false;
+		for(int i=0; i<4; i++) {
+			int ch = in.read() & 0xFF;
+			if (ch==0) terminated = true;
+			
+			if (!terminated) {
+				result += (char)ch;
+			}
+		}
+		
+		return result;
+	}
+	
+	public static String readTag(DataSlice in) throws IOException {
+		String result = "";
+		
+		boolean terminated = false;
+		for(int i=0; i<4; i++) {
+			int ch = in.read() & 0xFF;
+			if (ch==0) terminated = true;
+			
+			if (!terminated) {
+				result += (char)ch;
+			}
+		}
+		
+		return result;
 	}
 }

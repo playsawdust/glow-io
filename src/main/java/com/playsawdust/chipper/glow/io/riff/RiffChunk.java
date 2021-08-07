@@ -20,4 +20,12 @@ public class RiffChunk {
 		this.tag = tag;
 		this.contents = contents;
 	}
+	
+	public String getChunkType() {
+		return tag;
+	}
+	
+	public DataSlice getChunkData() {
+		return contents;
+	}
 }
